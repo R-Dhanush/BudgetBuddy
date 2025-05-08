@@ -1,0 +1,15 @@
+# root .gitignore
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# React build
+client/build/
+server/build/
+
+# Environment files
+.env
+.env.local

@@ -1,0 +1,20 @@
+.budget-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.budget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.budget-form-container {
+  margin-bottom: 2rem;
+}
+
+.budget-status-container {
+  margin-top: 2rem;
+}
