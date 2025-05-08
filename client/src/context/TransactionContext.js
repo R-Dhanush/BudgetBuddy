@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 
 const TransactionContext = createContext();
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const TransactionProvider = ({ children }) => {
   const [transactions, setTransactions] = useState([]);
@@ -24,7 +25,7 @@ export const TransactionProvider = ({ children }) => {
       if (filters.type) query.append('type', filters.type);
       if (filters.category) query.append('category', filters.category);
 
-      const response = await fetch(`http://localhost:5000/api/v1/transactions?${query.toString()}`, {
+      const response = await fetch(`${API_BASE_URL}/transactions?${query.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -41,7 +42,7 @@ export const TransactionProvider = ({ children }) => {
 
   const addTransaction = async (transaction) => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/transactions', {
+      const response = await fetch(`${API_BASE_URL}/transactions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +62,7 @@ export const TransactionProvider = ({ children }) => {
 
   const updateTransaction = async (id, updates) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/transactions/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/transactions/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +82,7 @@ export const TransactionProvider = ({ children }) => {
 
   const deleteTransaction = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/v1/transactions/${id}`, {
+      await fetch(`${API_BASE_URL}/transactions/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
@@ -104,7 +105,7 @@ export const TransactionProvider = ({ children }) => {
       if (filters.category) query.append('category', filters.category);
       query.append('format', format);
   
-      const response = await fetch(`http://localhost:5000/api/v1/transactions/export?${query.toString()}`, {
+      const response = await fetch(`${API_BASE_URL}/transactions/export?${query.toString()}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

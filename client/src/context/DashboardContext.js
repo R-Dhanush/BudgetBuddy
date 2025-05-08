@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useContext } from 'react';
 import { useAuth } from './AuthContext';
 
 const DashboardContext = createContext();
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const DashboardProvider = ({ children }) => {
   const [dashboardData, setDashboardData] = useState(null);
@@ -11,7 +12,7 @@ export const DashboardProvider = ({ children }) => {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/v1/dashboard', {
+      const response = await fetch(`${API_BASE_URL}/dashboard`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

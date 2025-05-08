@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useContext } from 'react';
 import { useAuth } from './AuthContext';
 
 const BudgetContext = createContext();
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const BudgetProvider = ({ children }) => {
   const [budget, setBudget] = useState(null);
@@ -12,7 +13,7 @@ export const BudgetProvider = ({ children }) => {
   const fetchCurrentBudget = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/v1/budgets/current', {
+      const response = await fetch(`${API_BASE_URL}/budgets/current`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -34,7 +35,7 @@ export const BudgetProvider = ({ children }) => {
 
   const createBudget = async (month, year, amount) => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/budgets', {
+      const response = await fetch(`${API_BASE_URL}/budgets`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ export const BudgetProvider = ({ children }) => {
 
   const updateBudget = async (id, updates) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/budgets/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/budgets/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
