@@ -6,8 +6,13 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://budgetbuddy-frontend-wc81.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+}));
 app.use(express.json());
+app.options('*', cors());
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
